@@ -16,7 +16,7 @@ Las **vistas** fueron creadas por medio de storyboards y xibs y se comunican ent
 ### Clases utilizadas
 
 - DataFacade, esta clase de tipo fachada permite a los controladores pedir datos sin tener que preocuparse de si existe o no conexión a internet; aquí se evalua y se regresa la información ya sea de el endpoint o de la base de datos local en realm.
-- Network: Esta clase es la que realiza la consulta de datos utilizando urlsession y contiene llamadas de tipo genericas para que pueda retornar cualquier tipo de datos que se necesite, aquí también existe una llamada para descargar hacer un post del "rating" de la película o serie que se desee.
+- Network: Esta clase es la que realiza la consulta de datos utilizando urlsession y contiene llamadas de tipo genericas para que pueda retornar cualquier tipo de datos que se necesite, aquí también existe una llamada para hacer un post del "rating" de la película o serie que se desee.
 - En la clase Endpoints existen solo elementos de tipo static para poder llamarlos desde cualquier lugar de la aplicación; aquí se encuentran todos los urls de las llamadas de la apliación así como las constantes que se necesitan para hacer las requests. Las constantes podrían ir en el keychain pero por poco tiempo se incluyeron aquí.
 - La clase connection status contiene un signletone de tipo booleano que se actualiza con el observable "**NWPathMonitor**", este permite identificar si existe conexión a internet y si esta cambia.
 - La clase RealmHandler contiene una llamada generica para insertar objectos de cualquier tipo a la base de datos de realm. También tiene métodos para extraer la información y filtrarla de acuerdo a lo que se solicita.
