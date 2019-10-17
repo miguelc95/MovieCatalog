@@ -11,6 +11,61 @@ import XCTest
 
 class myMoviesTests: XCTestCase {
     
+    
+    func testMovieRequest() {
+        let result : MoviesRequest?
+        result = try? JSONDecoder().decode(MoviesRequest.self, from: movieRequestExample)
+        XCTAssertNotNil(result)
+        
+        if let movies = result?.movies {
+            if let id = movies[0].id {
+                var endpoint =  Endpoints.getMovieVideos.replacingOccurrences(of: "#movie_id#", with:"\(id)")
+                endpoint = endpoint.replacingOccurrences(of: "#type#", with: String.type.movie.rawValue)
+
+                DataFacade.getVideos(endpoint: endpoint, id: id) { (videos) in
+                    XCTAssertNotNil(videos)
+                }
+            }
+        }
+        
+    }
+    
+    func testDataFacadeCallOnlineAndOffline() {
+        let endpoint = Endpoints.getMovieById.replacingOccurrences(of: "#id#", with: "1")
+        DataFacade.getMovie(fileLocation: endpoint, id: 1) { (movie, error) in
+            XCTAssertNotNil(error)
+            XCTAssertNotNil(movie)
+        }
+    }
+    
+    func testMoviesToRealm() {
+        let movie1 = Movie()
+        
+        let realmMovie = RealmMovie(movie: movie1, type: String.filmCategory.on_the_air)
+        
+        XCTAssertNotNil(realmMovie.id)
+    }
+    
+    func testRealmToMovie() {
+        let realmMovie = RealmMovie()
+        let movie = Movie(realmMovie: realmMovie)
+        
+        XCTAssertNotNil(movie.id)
+    }
+    
+    func testMovieData() {
+        let realmMovie = RealmMovie()
+        realmMovie.originalLanguage = "ES"
+        let movie = Movie(realmMovie: realmMovie)
+        
+        let movie1 = Movie()
+        movie1.originalLanguage = "ES"
+        
+        let realmMovie1 = RealmMovie(movie: movie1, type: String.filmCategory.on_the_air)
+        
+        XCTAssertEqual(realmMovie1.originalLanguage, movie.originalLanguage)
+    }
+    
     private let movieRequestExample =  Data("""
         {
         "page": 1,
@@ -121,21 +176,6 @@ class myMoviesTests: XCTestCase {
 
         }
         """.utf8)
-    
-    func testMovieRequest() {
-        let result : MoviesRequest?
-        result = try? JSONDecoder().decode(MoviesRequest.self, from: movieRequestExample)
-        XCTAssertNotNil(result)
-        
-    }
-    
-    func testDataFacadeCallOnlineAndOffline() {
-        let endpoint = Endpoints.getMovieById.replacingOccurrences(of: "#id#", with: "1")
-        DataFacade.getMovie(fileLocation: endpoint, id: 1) { (movie, error) in
-            XCTAssertNil(error)
-            XCTAssertNotNil(movie)
-        }
-    }
 
     
 }

@@ -15,7 +15,7 @@ class TVRequest: Decodable {
         case series = "results"
     }
     
-    init( series: [TV]) {
+    init(series: [TV]) {
         self.series = series
     }
 }

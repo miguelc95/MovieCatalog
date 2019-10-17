@@ -15,7 +15,7 @@ class Movie: Decodable {
     let posterPath: String?
     let id: Int?
     let adult: Bool?
-    let backdropPath, originalLanguage, originalTitle: String?
+    var backdropPath, originalLanguage, originalTitle: String?
     let title: String?
     let voteAverage: Double?
     let overview, releaseDate: String?
@@ -65,5 +65,21 @@ class Movie: Decodable {
         self.voteAverage = realmMovie.voteAverage
         self.overview = realmMovie.overview
         self.releaseDate = realmMovie.releaseDate
+    }
+    
+    init() {
+        self.popularity = 0
+        self.voteCount = 0
+        self.video = false
+        self.posterPath = ""
+        self.id = -1
+        self.adult = false
+        self.backdropPath = ""
+        self.originalLanguage = ""
+        self.originalTitle = ""
+        self.title = ""
+        self.voteAverage = 0
+        self.overview = ""
+        self.releaseDate = ""
     }
 }
