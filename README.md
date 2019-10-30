@@ -1,6 +1,8 @@
 # Rappi Test Movie Catalog
 
-La aplicación cuenta con persistencia, por lo tanto esta puede ser utilizada sin datos. U vez consultada la sección las películas y series visualizadas o buscadas se almacenan en la base de datos local y pueden ser vistas más adelante.
+![](movieCatalog.gif)
+
+La aplicación cuenta con persistencia, por lo tanto esta puede ser utilizada sin datos. Una vez consultada la sección las películas y series visualizadas o buscadas se almacenan en la base de datos local y pueden ser vistas más adelante.
 
 Los videos relacionados a la película o serie se pueden ver al deslizar el carousel en la sección de detalle.
 
